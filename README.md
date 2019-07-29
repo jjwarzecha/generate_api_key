@@ -1,2 +1,2 @@
-# oci_generate_api_key
-Generate API pem key with python.
+# Generate RSA key pair
+Generate RSA key pair in PEM and OpenSSH format with Python.
