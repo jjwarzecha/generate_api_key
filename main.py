@@ -31,6 +31,12 @@ def get_fingerprint(public_key):
     return fingerprint
 
 
+def save_to_file (filename, file_content):
+    f = open (filename, 'w')
+    f.write (file_content + '\n')
+    f.close()
+    return filename
+
 
 def main():
     """ Main entry point of the app """
@@ -57,17 +63,16 @@ def main():
     out_pem_public_key_str = pem_public_key.decode('utf-8')
     out_ssh_public_key_str = ssh_public_key.decode('utf-8')
 
-    print('Private RSA key in PEM format:')
+    print('Private RSA key in PEM format: ' + save_to_file("oci_key_private.pem", out_pem_private_key_str))
     print(out_pem_private_key_str)
     print('+++++++++++++++++++++++++++++++++++++++++++++')
-    print('Public RSA key in PEM format:')
+    print('Public RSA key in PEM format:' + save_to_file("oci_key_public.pem", out_pem_public_key_str))
     print(out_pem_public_key_str)
     print('+++++++++++++++++++++++++++++++++++++++++++++')
-    print('Fingerprint:',get_fingerprint(pem_public_key))
+    print('Fingerprint:',get_fingerprint(pem_public_key) + save_to_file("oci_fingerprint.txt", get_fingerprint(pem_public_key)))
     print('+++++++++++++++++++++++++++++++++++++++++++++')
-    print('Public RSA key in OpenSSH format:')
+    print('Public RSA key in OpenSSH format:' + (save_to_file("oci_openssh.pub", out_ssh_public_key_str)))
     print(out_ssh_public_key_str)
-
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
